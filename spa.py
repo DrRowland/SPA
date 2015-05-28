@@ -176,7 +176,7 @@ for m in M:
    l = m['lecturer']
    MCompWorkload[l]=MCompWorkload.get(l,0)+1
    p = Project[m['projectid']]['title']
-   print("Student "+s+" allocated to "+p+" supervised by  "+l)
+   print("Student "+s+" allocated to "+p+" supervised by "+l)
 
 print
 print("Single Weighted Projects")
@@ -192,5 +192,14 @@ SPA()
 for m in M:
    s = m['student']
    l = m['lecturer']
+   Lecturer[l]['limit'] = Lecturer[l]['limit'] - 1
    p = Project[m['projectid']]['title']
-   print("Student "+s+" allocated to "+p+" supervised by  "+l)
+   print("Student "+s+" allocated to "+p+" supervised by "+l)
+
+print
+print("Remaining Capacity")
+print("==================")
+for l in Lecturer:
+   limit=Lecturer[l]['limit']
+   if(limit>0):
+      print(l+" has "+str(limit)+" supervisions free")
