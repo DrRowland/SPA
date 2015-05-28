@@ -1,0 +1,17 @@
+"Project Definitions",,,
+"Project ID","Maximum Allocation","Project Title",
+"A",1,"Big Dog Project",
+"B",2,"Big Cow Project",
+"C",1,"Big Sheep Project",
+,,,
+"Lecturer Preferences",,,
+"Lecturer Name","Maximum Allocation","Project IDs…",
+"Duncan",1,"A",
+"David",1,"B","C"
+"Ben",1,"C",
+,,,
+"Student Preferences",,,
+"Student Name","Project IDs…",,
+"Frodo","A","B","C"
+"Bilbo","C","B",
+"Dilbert","A","C",

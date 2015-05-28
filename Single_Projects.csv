@@ -1,0 +1,17 @@
+"Project Definitions",,,
+"Project ID","Maximum Allocation","Project Title",
+"A",5,"Dog Project",
+"B",5,"Cow Project",
+"C",1,"Sheep Project",
+,,,
+"Lecturer Preferences",,,
+"Lecturer Name","Maximum Allocation (includes Mcomp)","Project IDs…",
+"Duncan",4,"A",
+"David",6,"B","C"
+"Ben",2,"B",
+,,,
+"Student Preferences",,,
+"Student Name","Project IDs…",,
+"Fred","A","B","C"
+"Jim","C","B",
+"Sheila","A","C",
