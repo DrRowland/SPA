@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import csv
+from random import sample
 
 Project = {}
 Lecturer = {}
@@ -68,13 +69,13 @@ def isStudentAssigned(s):
    return False
 
 def getSomeUnassignedStudentWithNonEmptyList():
-   for s in Student:
+   for s in sample(Student,len(Student)):
       w = Student[s]
       if not isStudentAssigned(s) and len(w['projects'])>0:
          return s
 
 def getLecturerOffering(p):
-   for l in Lecturer:
+   for l in sample(Lecturer,len(Lecturer)):
       w = Lecturer[l]
       if p in w['projects']:
          return l
@@ -108,7 +109,7 @@ def isProjectAllocated(p):
    return False
 
 def getSomeStudentDoing(p):
-   for m in M:
+   for m in sample(M,len(M)):
       if m['projectid']==p:
          return m['student']
    print("Err: No students doing this project")
