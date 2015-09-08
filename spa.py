@@ -21,7 +21,7 @@ def csvInit(filename):
       if row[0]=='Project Definitions':
          reader.next() #Skip Headers
       elif row[0]=='':
-       break 
+         break 
       else:
          sourceid = row[0]
          limit = int(row[1])
@@ -33,7 +33,7 @@ def csvInit(filename):
       if row[0]=='Lecturer Preferences':
          reader.next() #Skip Headers
       elif row[0]=='':
-       break
+         break
       else:
          projects = []
          for sourceid in row[2:]:
@@ -48,7 +48,7 @@ def csvInit(filename):
       if row[0]=='Student Preferences':
          reader.next() #Skip Headers
       elif row[0]=='':
-       break
+         break
       else:
          destids = []
          for sourceid in row[1:]:
@@ -75,7 +75,7 @@ def getSomeUnassignedStudentWithNonEmptyList():
          return s
 
 def getLecturerOffering(p):
-   for l in sample(Lecturer,len(Lecturer)):
+   for l in Lecturer:
       w = Lecturer[l]
       if p in w['projects']:
          return l
