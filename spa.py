@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import csv
-from random import sample
+from random import sample, shuffle
 
 Project = {}
 Lecturer = {}
@@ -54,10 +54,13 @@ def csvInit(filename):
          for sourceid in row[1:]:
             if sourceid!='':
                p=ProjectsSource[sourceid]
+               pidlist=[]
                for pid in Project:
                   px=Project[pid]
                   if p['title']==px['title']:
-                     destids.append(pid)
+                     pidlist.append(pid)
+               shuffle(pidlist) #Shuffle to random pid order for a student (fairer)
+               destids.extend(pidlist)
          Student[row[0]]={'projects':destids}
 
    fileid.close()
@@ -166,9 +169,7 @@ def SPA():
 
 #Main
 
-print
-print("Double Weighted Projects")
-print("========================")
+print("MComp")
 csvInit("Double_Projects.csv")
 SPA()
 MCompWorkload={}
@@ -176,12 +177,18 @@ for m in M:
    s = m['student']
    l = m['lecturer']
    MCompWorkload[l]=MCompWorkload.get(l,0)+1
-   p = Project[m['projectid']]['title']
-   print("Student "+s+" allocated to "+p+" supervised by "+l)
+   id = m['projectid']
+   p = Project[id]['title']
+   print(s+","+l+","+p)
 
 print
-print("Single Weighted Projects")
-print("========================")
+print("Unassigned Students")
+for s in sample(Student,len(Student)):
+   if not isStudentAssigned(s):
+      print s
+
+print
+print("BSc")
 csvInit("Single_Projects.csv")
 for l in MCompWorkload:
    limit=Lecturer[l]['limit'] - (MCompWorkload[l]*2)
@@ -194,12 +201,18 @@ for m in M:
    s = m['student']
    l = m['lecturer']
    Lecturer[l]['limit'] = Lecturer[l]['limit'] - 1
-   p = Project[m['projectid']]['title']
-   print("Student "+s+" allocated to "+p+" supervised by "+l)
+   id = m['projectid']
+   p = Project[id]['title']
+   print(s+","+l+","+p)
+
+print
+print("Unassigned Students")
+for s in sample(Student,len(Student)):
+   if not isStudentAssigned(s):
+      print s
 
 print
 print("Remaining Capacity")
-print("==================")
 for l in Lecturer:
    limit=Lecturer[l]['limit']
    if(limit>0):
