@@ -11,15 +11,14 @@ M=[]
 def getRank(filename,s,c):
    fileid = open(filename, mode='r')
    reader = csv.reader(fileid)
+   r=-1
    for row in reader:
-      if len(row)>5:
-         if row[0] == s:
-            for r in range(1,6):
-               if row[r]==c:
-                  fileid.close()
-                  return r
+      if row[0] == s:
+         if c in row:
+            r=row.index(c)
+         break
    fileid.close()
-   return -1
+   return r
 
 
 def csvInit(filename):
