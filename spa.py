@@ -8,6 +8,20 @@ Lecturer = {}
 Student = {}
 M=[]
 
+def getRank(filename,s,c):
+   fileid = open(filename, mode='r')
+   reader = csv.reader(fileid)
+   for row in reader:
+      if len(row)>5:
+         if row[0] == s:
+            for r in range(1,6):
+               if row[r]==c:
+                  fileid.close()
+                  return r
+   fileid.close()
+   return -1
+
+
 def csvInit(filename):
    Project.clear()
    Lecturer.clear()
@@ -26,7 +40,7 @@ def csvInit(filename):
          sourceid = row[0]
          limit = int(row[1])
          title = row[2]
-         ProjectsSource[sourceid]={'limit':limit,'title':title}
+         ProjectsSource[sourceid]={'limit':limit,'title':title,'sourceid':sourceid}
 
    destid=0
    for row in reader:
@@ -179,7 +193,9 @@ for m in M:
    MCompWorkload[l]=MCompWorkload.get(l,0)+1
    id = m['projectid']
    p = Project[id]['title']
-   print(s+","+l+","+p)
+   c = Project[id]['sourceid']
+   r = str(getRank("Double_Projects.csv",s,c))
+   print(s+","+l+","+p+","+c+","+r)
 
 print
 print("Unassigned Students")
@@ -203,7 +219,9 @@ for m in M:
    Lecturer[l]['limit'] = Lecturer[l]['limit'] - 1
    id = m['projectid']
    p = Project[id]['title']
-   print(s+","+l+","+p)
+   c = Project[id]['sourceid']
+   r = str(getRank("Single_Projects.csv",s,c))
+   print(s+","+l+","+p+","+c+","+r)
 
 print
 print("Unassigned Students")
